@@ -12,7 +12,9 @@
     const fwdBtn = document.createElement('button')
     const homeBtn = document.createElement('button')
     const addProductBtn = document.createElement('button')
+    addProductBtn.id = 'add-product-button'
     let description = document.createElement('p')
+
     
     
     const prodForm = document.createElement('form')
@@ -221,20 +223,23 @@
         desc.placeholder = product.description
         desc.value = ''
    
-        descForm.appendChild(desc)
+        descForm.append(desc, submitBtn)
         div2.append(editBtn, deleteBtn)
         div2.remove()
-        div3.append(descForm, submitBtn)
+        div3.appendChild(descForm)
         div.append(div3)
 
-        submitBtn.addEventListener('click', (e) => updateDesc(e, div))
+        descForm.addEventListener('submit', (e) => updateDesc(e, descForm, div2))
     }
 
-    function updateDesc(e, div) {
+    function updateDesc(e, descForm, div2) {
+        btn = document.querySelector('#add-product-button')
+        e.preventDefault()
+        console.log(e)
         let userDesc = {
-            description: e.path[1].childNodes[0][0].value
+            description: e.target[0].value
         }
-        fetch(productsUrl + `/${e.target.parentElement.parentElement.id}`, {
+        fetch(productsUrl + `/${e.path[2].id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -245,7 +250,11 @@
         .then(res => res.json())
         .then(newDesc => {
                 description = newDesc
-                div.innerHTML = ''
+                main.innerHTML = ''
+                div2.innerHTML = ''
+                // btn.remove()
+                // div.remove()
+                // descForm.innerHTML = ''
                 showProducts(newDesc)
         })
     }
