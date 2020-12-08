@@ -1,0 +1,27 @@
+div {
+    text-align: center;
+}
+
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+}
+
+body {
+    background-color: #f1acb99e;
+}
+
+.hair-type-name {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* .names-of-products {
+    font-family: cursive;
+} */
+
+
+
+p {
+    font-size: 150%;
+    color: green;
+  }
